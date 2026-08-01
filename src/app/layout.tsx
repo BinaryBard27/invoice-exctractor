@@ -4,8 +4,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import WelcomeToast from "@/components/WelcomeToast";
 
 export const metadata: Metadata = {
-  title: "Invoice PDF to Excel Converter — Free Invoice Data Extractor",
-  description: "Extract invoice data from PDF to Excel or CSV instantly. Parse vendor, date, totals and line items from any invoice. First 3 free.",
+  title: "Invoice PDF to Excel Converter — InvoiceParser",
+  description: "InvoiceParser extracts invoice data from PDF to Excel or CSV instantly. Parse vendor, date, totals and line items from any invoice. Free to try with no credit card needed.",
 };
 
 export default function RootLayout({
