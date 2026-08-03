@@ -15,7 +15,7 @@ const steps = [
 ];
 
 const faqs = [
-  { question: 'What is InvoiceParser?', answer: 'InvoiceParser turns invoice PDFs into structured Excel or CSV files, including vendor details, dates, totals, tax, and line items.' },
+  { question: 'What is PullInvoice?', answer: 'PullInvoice turns invoice PDFs into structured Excel or CSV files, including vendor details, dates, totals, tax, and line items.' },
   { question: 'Do I need to create an account?', answer: 'Yes. The extraction tool is protected by Clerk login so your account and usage can be managed securely.' },
   { question: 'How many invoices can I try for free?', answer: 'You can process your first 10 invoices for free. After that, unlimited extraction is available with a one-time $19 payment.' },
   { question: 'What file formats can I export?', answer: 'You can download your extracted invoice data as an Excel workbook or a CSV file.' },
@@ -55,9 +55,9 @@ export default function LandingPage() {
 
         <section className="bg-[#f7f7f8] px-4 py-16 sm:py-20" aria-labelledby="faq-heading"><div className="mx-auto max-w-4xl"><div className="text-center"><p className="text-sm font-bold uppercase tracking-widest text-slate-950">FAQ</p><h2 id="faq-heading" className="mt-2 text-3xl font-extrabold tracking-tight text-slate-950">Questions, answered</h2></div><div className="mt-10 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white px-6">{faqs.map(({ question, answer }) => <details key={question} className="group py-5"><summary className="cursor-pointer list-none pr-8 text-lg font-bold text-slate-900 marker:hidden [&::-webkit-details-marker]:hidden">{question}<span className="float-right text-slate-400 transition group-open:rotate-45" aria-hidden="true">+</span></summary><p className="mt-3 max-w-3xl leading-7 text-slate-600">{answer}</p></details>)}</div></div></section>
 
-        <section className="border-b border-slate-200 bg-white px-4 py-14"><div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left"><div><h2 className="text-2xl font-extrabold">Ready to clear your invoice backlog?</h2><p className="mt-1 text-slate-600">Free to try. No credit card needed.</p></div><Link href="/extract" className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-slate-950 px-6 py-3 font-bold text-white hover:bg-slate-800">Open InvoiceParser <ArrowRight className="h-4 w-4" /></Link></div></section>
+        <section className="border-b border-slate-200 bg-white px-4 py-14"><div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left"><div><h2 className="text-2xl font-extrabold">Ready to clear your invoice backlog?</h2><p className="mt-1 text-slate-600">Free to try. No credit card needed.</p></div><Link href="/extract" className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-slate-950 px-6 py-3 font-bold text-white hover:bg-slate-800">Open PullInvoice <ArrowRight className="h-4 w-4" /></Link></div></section>
       </main>
-      <footer className="bg-white px-4 py-10 text-center text-sm text-slate-500"><p>InvoiceParser · Secure PDF invoice extraction to Excel and CSV</p><p className="mt-2">Your files are processed for extraction and not stored.</p></footer>
+      <footer className="bg-white px-4 py-10 text-center text-sm text-slate-500"><p>PullInvoice · Secure PDF invoice extraction to Excel and CSV</p><p className="mt-2">Your files are processed for extraction and not stored.</p></footer>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(({ question, answer }) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) }) }} />
     </div>
   );
