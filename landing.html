@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" class="antialiased text-gray-900 bg-gray-50 dark:bg-gray-950 dark:text-gray-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-gumroad-field="name">Custom Landing Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'media',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fdf8f6',
+              100: '#f2e8e5',
+              200: '#eaddd7',
+              300: '#e0cec7',
+              400: '#d2bab0',
+              500: '#a3a3a3', // neutral gray for now
+              600: '#404040',
+              700: '#262626',
+              800: '#171717',
+              900: '#0a0a0a',
+            }
+          },
+          animation: {
+            'blob': 'blob 7s infinite',
+            'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+          },
+          keyframes: {
+            blob: {
+              '0%': { transform: 'translate(0px, 0px) scale(1)' },
+              '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+              '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+              '100%': { transform: 'translate(0px, 0px) scale(1)' },
+            },
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Glassmorphism styles */
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    @media (prefers-color-scheme: dark) {
+      .glass {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen overflow-hidden selection:bg-rose-200 selection:text-rose-900 dark:selection:bg-rose-900 dark:selection:text-rose-100 flex items-center justify-center p-4 sm:p-8">
+
+  <!-- Animated Background Blobs -->
+  <div class="absolute top-0 -left-4 w-72 h-72 bg-purple-300 dark:bg-purple-900 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-70 animate-blob"></div>
+  <div class="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 dark:bg-yellow-900 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+  <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 dark:bg-pink-900 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+
+  <main class="relative z-10 w-full max-w-4xl opacity-0 animate-fade-in-up">
+    <div class="glass rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+      
+      <!-- Visual Half -->
+      <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative bg-gradient-to-br from-indigo-500/10 to-purple-500/10">
+        <div class="absolute inset-0 bg-grid-slate-900/[0.04] dark:bg-grid-slate-100/[0.03] bg-[bottom_1px_center]"></div>
+        
+        <div class="relative flex items-center justify-center w-full aspect-square rounded-2xl bg-gradient-to-tr from-rose-400 to-orange-300 shadow-inner overflow-hidden group">
+          <!-- Abstract Graphic in place of Cover Image -->
+          <svg class="w-1/2 h-1/2 text-white/80 group-hover:scale-110 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path></svg>
+        </div>
+      </div>
+
+      <!-- Content Half -->
+      <div class="md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+        
+        <div class="inline-flex items-center space-x-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 px-3 py-1 rounded-full text-sm font-medium w-max mb-6">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+          </span>
+          <span>Available Now</span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 gradient-text" data-gumroad-field="name">
+          Product Title
+        </h1>
+        
+        <div class="prose dark:prose-invert prose-lg text-gray-600 dark:text-gray-300 mb-8" data-gumroad-field="description">
+          <p>This is where your amazing product description will go. It outlines all the incredible features, benefits, and reasons why someone absolutely needs to get this today.</p>
+        </div>
+
+        <div class="mt-auto border-t border-gray-200 dark:border-gray-800 pt-6">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex flex-col">
+              <span class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Price</span>
+              <div class="flex items-baseline space-x-1">
+                <span class="text-3xl font-black text-gray-900 dark:text-white" data-gumroad-field="price">$29</span>
+                <span class="text-lg text-gray-500">USD</span>
+              </div>
+            </div>
+          </div>
+
+          <button data-gumroad-action="buy" class="group relative w-full flex justify-center py-4 px-6 border border-transparent text-lg font-bold rounded-2xl text-white bg-gray-900 hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 dark:focus:ring-white transition-all transform hover:scale-[1.02] shadow-lg hover:shadow-xl overflow-hidden">
+            <span class="relative z-10 flex items-center">
+              I want this!
+              <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </span>
+            <!-- Button hover gradient effect -->
+            <div class="absolute inset-0 h-full w-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+          </button>
+          
+          <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-4 flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            Secure checkout by Gumroad
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+  
+  <style>
+    @keyframes shimmer {
+      100% { transform: translateX(100%); }
+    }
+  </style>
+</body>
+</html>
