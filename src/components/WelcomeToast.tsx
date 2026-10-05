@@ -34,7 +34,7 @@ export default function WelcomeToast() {
   return (
     <div className="fixed bottom-4 right-4 z-50 animate-in slide-in-from-bottom-5 fade-in duration-300">
       <div className="bg-white border border-slate-200 shadow-xl rounded-xl p-4 flex items-start gap-3 max-w-sm">
-        <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+        <CheckCircle className="w-5 h-5 text-slate-950 flex-shrink-0 mt-0.5" />
         <div>
           <h3 className="font-bold text-slate-900 text-sm">Welcome aboard! 🎉</h3>
           <p className="text-slate-600 text-sm mt-1">

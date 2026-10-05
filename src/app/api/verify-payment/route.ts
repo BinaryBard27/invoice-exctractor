@@ -1,16 +1,20 @@
 import { NextResponse } from 'next/server';
-import { setPaidCookie } from '@/lib/access';
-import { getClientKey, isRateLimited } from '@/lib/rate-limit';
+import { auth } from '@clerk/nextjs/server';
+import { getClientKey } from '@/lib/rate-limit';
+import { grantPaidAccess, isRequestRateLimited } from '@/lib/server-data';
 
 export async function POST(request: Request) {
   try {
-    if (isRateLimited(`payment:${getClientKey(request)}`, 10, 60_000)) {
+    const { userId } = await auth();
+    if (!userId) return NextResponse.json({ verified: false, error: 'Sign in required.' }, { status: 401 });
+
+    if (await isRequestRateLimited(`payment:${getClientKey(request)}:${userId}`, 10, 60)) {
       return NextResponse.json({ verified: false, error: 'Too many verification attempts. Please try again in a minute.' }, { status: 429 });
     }
     const body = await request.json();
-    const { license_key } = body;
+    const license_key = typeof body?.license_key === 'string' ? body.license_key.trim() : '';
 
-    if (!license_key) {
+    if (!license_key || license_key.length > 256) {
       return NextResponse.json({ verified: false, error: 'No license key provided' }, { status: 400 });
     }
 
@@ -20,6 +24,7 @@ export async function POST(request: Request) {
     }
 
     const res = await fetch('https://api.gumroad.com/v2/licenses/verify', {
+      cache: 'no-store',
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -33,9 +38,8 @@ export async function POST(request: Request) {
     const data = await res.json();
 
     if (data.success === true) {
-      const response = NextResponse.json({ verified: true });
-      setPaidCookie(response);
-      return response;
+      await grantPaidAccess(userId, license_key);
+      return NextResponse.json({ verified: true });
     }
     
     return NextResponse.json({ verified: false });

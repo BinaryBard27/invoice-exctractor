@@ -28,6 +28,14 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# local tools and inspection artifacts
+gumroad.exe
+gumroad.zip
+/install-cli.sh
+/man/
+/tmp/
+/srcapp/
+
 # vercel
 .vercel
 

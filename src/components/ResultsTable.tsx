@@ -12,9 +12,9 @@ export default function ResultsTable({ results }: ResultsTableProps) {
   const [activeTab, setActiveTab] = useState<'summary' | 'line-items'>('summary');
 
   const ConfidenceDot = ({ level }: { level: 'high' | 'medium' | 'low' }) => {
-    if (level === 'high') return <CheckCircle2 className="w-4 h-4 text-green-600 inline" />;
-    if (level === 'medium') return <AlertTriangle className="w-4 h-4 text-yellow-600 inline" />;
-    return <XCircle className="w-4 h-4 text-red-600 inline" />;
+    if (level === 'high') return <CheckCircle2 aria-label="High confidence" className="w-4 h-4 text-slate-950 inline" />;
+    if (level === 'medium') return <AlertTriangle aria-label="Medium confidence" className="w-4 h-4 text-slate-600 inline" />;
+    return <XCircle aria-label="Low confidence" className="w-4 h-4 text-slate-400 inline" />;
   };
 
   return (

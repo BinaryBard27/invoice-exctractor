@@ -5,12 +5,10 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { CheckCircle, XCircle, ArrowRight, Loader2 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import { useUser } from '@clerk/nextjs';
 
 function SuccessContent() {
   const searchParams = useSearchParams();
   const licenseKey = searchParams.get('license_key') || '';
-  const { user } = useUser();
   
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
 
@@ -31,26 +29,13 @@ function SuccessContent() {
       .then(res => res.json())
       .then(async data => {
         if (data.verified) {
-          localStorage.setItem('invoice_paid', 'true');
-          if (licenseKey) {
-            localStorage.setItem('license_key', licenseKey);
-          }
-          if (user) {
-            await user.update({
-              unsafeMetadata: {
-                ...user.unsafeMetadata,
-                invoice_paid: true,
-                ...(licenseKey && { license_key: licenseKey })
-              }
-            });
-          }
           setStatus('success');
         } else {
           setStatus('error');
         }
       })
       .catch(() => setStatus('error'));
-  }, [licenseKey, user]);
+  }, [licenseKey]);
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 md:p-12 max-w-lg mx-auto text-center mt-20">

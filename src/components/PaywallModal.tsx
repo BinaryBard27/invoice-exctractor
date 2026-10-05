@@ -2,7 +2,6 @@
 
 import { Lock, X } from 'lucide-react';
 import { useState } from 'react';
-import { useUser } from '@clerk/nextjs';
 
 interface PaywallModalProps {
   onClose: () => void;
@@ -12,7 +11,6 @@ export default function PaywallModal({ onClose }: PaywallModalProps) {
   const [loading, setLoading] = useState(false);
   const [licenseKey, setLicenseKey] = useState('');
   const [error, setError] = useState('');
-  const { user } = useUser();
 
   const handleVerify = async () => {
     if (!licenseKey.trim()) {
@@ -37,11 +35,6 @@ export default function PaywallModal({ onClose }: PaywallModalProps) {
       const data = await res.json();
 
       if (data.verified) {
-        // It's valid
-        localStorage.setItem('invoice_paid', 'true');
-        if (user) {
-          await user.update({ unsafeMetadata: { invoice_paid: true } });
-        }
         window.location.reload();
       } else {
         setError('Invalid or expired license key.');

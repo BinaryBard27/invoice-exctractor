@@ -1,46 +1,19 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import UploadZone from '@/components/UploadZone';
 import ResultsTable from '@/components/ResultsTable';
 import DownloadButtons from '@/components/DownloadButtons';
 import PaywallModal from '@/components/PaywallModal';
 import { InvoiceData } from '@/lib/parser';
-import { useUser } from '@clerk/nextjs';
 
 export default function ExtractPage() {
   const [isExtracting, setIsExtracting] = useState(false);
   const [results, setResults] = useState<InvoiceData[] | null>(null);
   const [showPaywall, setShowPaywall] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { user } = useUser();
-
-  const checkPaywallStatus = () => {
-    const isPaid = user?.unsafeMetadata?.invoice_paid === true || localStorage.getItem('invoice_paid') === 'true';
-    if (isPaid) return false;
-
-    const count = parseInt(localStorage.getItem('invoice_extract_count') || '0', 10);
-    return count >= 10;
-  };
-
-  useEffect(() => {
-    if (user?.unsafeMetadata?.invoice_paid === true && showPaywall) {
-      setShowPaywall(false);
-    }
-  }, [user?.unsafeMetadata?.invoice_paid, showPaywall]);
-
-  const incrementExtractCount = (invoiceCount: number) => {
-    const count = parseInt(localStorage.getItem('invoice_extract_count') || '0', 10);
-    localStorage.setItem('invoice_extract_count', (count + invoiceCount).toString());
-  };
-
   const handleExtract = async (files: File[]) => {
-    if (checkPaywallStatus()) {
-      setShowPaywall(true);
-      return;
-    }
-
     setIsExtracting(true);
     setError(null);
     setResults(null);
@@ -65,7 +38,6 @@ export default function ExtractPage() {
 
       const data = await response.json();
       setResults(data);
-      incrementExtractCount(files.length);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong during extraction.');
     } finally {
